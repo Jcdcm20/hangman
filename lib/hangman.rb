@@ -13,7 +13,6 @@ class Hangman
       show_word
       get_guess
       check_attempt
-      @incorrect_guesses += 1
     end
     puts word
   end
@@ -34,6 +33,10 @@ class Hangman
   def get_guess
     puts "\n\n"
     @guess = gets.chomp
+    if @guess.length > 1
+      puts 'Please enter just one letter'
+      get_guess
+    end
   end
 
   def show_word
@@ -43,10 +46,16 @@ class Hangman
   end
 
   def check_attempt
+    change = 0
     @word.split('').each_with_index do |l, i|
       if l == @guess
         @masked_word[i] = @guess
+        change += 1
       end
+    end
+
+    if change == 0
+      @incorrect_guesses += 1
     end
   end
 end
