@@ -32,7 +32,7 @@ class Hangman
 
   def get_guess
     puts "\n\n"
-    @guess = gets.chomp
+    @guess = gets.chomp.downcase
     if @guess.length > 1
       puts 'Please enter just one letter'
       get_guess
