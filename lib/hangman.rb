@@ -62,3 +62,14 @@ end
 
 game = Hangman.new
 game.play
+puts 'Welcome to hangman!'
+puts '1 - New Game'
+puts '2 - Load Game'
+
+op = gets.chomp
+if op == 1
+  game = Hangman.new
+  game.play
+else
+  #Load game object
+end
