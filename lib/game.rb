@@ -11,11 +11,7 @@ if op == 1
   game = Hangman.new
   game.play
 elsif op == 2
-  show_saved_files
+  game = Hangman.new('a')
 else
   exit()
-end
-
-def show_saved_files
-
 end
