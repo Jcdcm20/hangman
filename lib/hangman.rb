@@ -1,23 +1,19 @@
 class Hangman
   attr_accessor :word, :incorrect_guesses
-
   def initialize
-    @word = pick_word
+    @word = select_word
     @masked_word = Array.new(word.length, '_')
     @incorrect_guesses = 0
     @guessed_letters = ''
   end
-  
+
   def play
     while incorrect_guesses < 7
       show_word
-      get_guess
-      check_attempt
     end
-    puts word
   end
 
-  def pick_word
+  def select_word
     File.open('google-10000-english-no-swears.txt', 'r') do |file|
       dict = []
       file.each do |line|
@@ -30,46 +26,7 @@ class Hangman
     end
   end
 
-  def get_guess
-    puts "\n\n"
-    @guess = gets.chomp.downcase
-    if @guess.length > 1
-      puts 'Please enter just one letter'
-      get_guess
-    end
-  end
-
   def show_word
-    @masked_word.each do |letter|
-      print "#{letter} "
-    end
+    puts @word
   end
-
-  def check_attempt
-    change = 0
-    @word.split('').each_with_index do |l, i|
-      if l == @guess
-        @masked_word[i] = @guess
-        change += 1
-      end
-    end
-
-    if change == 0
-      @incorrect_guesses += 1
-    end
-  end
-end
-
-game = Hangman.new
-game.play
-puts 'Welcome to hangman!'
-puts '1 - New Game'
-puts '2 - Load Game'
-
-op = gets.chomp
-if op == 1
-  game = Hangman.new
-  game.play
-else
-  #Load game object
 end
