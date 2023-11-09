@@ -1,3 +1,5 @@
+require 'yaml'
+
 class Hangman
   attr_accessor :word, :incorrect_guesses
   def initialize(seed='')
@@ -7,9 +9,7 @@ class Hangman
       @incorrect_guesses = 0
       @guessed_letters = ''
     else
-      @word = 'test'
-      @masked_word = 'test'
-      check_win
+      puts 'test'
   
     end
   end
@@ -20,6 +20,15 @@ class Hangman
       get_guess
       check
       check_win
+      puts 'Want to save and continue later? (y\n)'
+      option = gets.chomp
+
+      if option == 'y'
+        save
+        break
+      else
+        next
+      end
     end
   end
 
@@ -64,7 +73,8 @@ class Hangman
       @incorrect_guesses += 1
       puts "\nWrong guess"
       puts "#{7-@incorrect_guesses} left"
-      
+    else
+      show_word
     end
   end
 
@@ -73,8 +83,21 @@ class Hangman
       puts "\nYou guessed the whole word"
       show_word
       exit()
-    else
-      puts 'Try again'
     end
+  end
+
+  def save
+    puts 'Please enter a name for the save file: '
+  
+    name = gets.chomp!
+
+    f = File.open("saved_games/#{name}.yml", 'w')
+    YAML.dump({
+      :word => @word,
+      :masked_word => @masked_word,
+      :incorrect_guesses => @incorrect_guesses,
+      :guessed_letters => @guessed_letters
+    }, f)
+    f.close
   end
 end
