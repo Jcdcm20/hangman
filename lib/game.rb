@@ -11,7 +11,19 @@ if op == 1
   game = Hangman.new
   game.play
 elsif op == 2
-  game = Hangman.new('a')
+  saves = Dir.entries("saved_games")
+  c = 1
+  saves.each do |file|
+    unless file == '.' || file == '..'
+      puts "#{c} - #{file}"
+      c += 1
+    end
+  end
+  puts 'Please choose a save file'
+  save = gets.chomp.to_i
+
+  game = Hangman.new(save)
+  game.play
 else
   exit()
 end
