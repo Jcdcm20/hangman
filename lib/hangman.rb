@@ -9,7 +9,10 @@ class Hangman
       @incorrect_guesses = 0
       @guessed_letters = ''
     else
-      puts 'test'
+      @word = seed[:word]
+      @masked_word = seed[:masked_word]
+      @incorrect_guesses = seed[:incorrect_guesses]
+      @guessed_letters = seed[:guessed_letters]
   
     end
   end
