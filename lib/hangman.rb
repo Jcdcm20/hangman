@@ -23,7 +23,7 @@ class Hangman
       get_guess
       check
       check_win
-      puts 'Want to save and continue later? (y\n)'
+      puts "\nWant to save and continue later? (y/n)"
       option = gets.chomp
 
       if option == 'y'
